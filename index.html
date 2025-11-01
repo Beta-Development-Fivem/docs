@@ -51,6 +51,86 @@
             animation: pulse 2s ease-in-out infinite;
         }
 
+        .social-links {
+            padding: 20px;
+            border-top: 1px solid #2a2a2a;
+            margin-top: auto;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, rgba(74, 158, 255, 0.1) 0%, rgba(53, 122, 189, 0.05) 100%);
+            border: 1px solid #2a2a2a;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #e0e0e0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(74, 158, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .social-link:hover::before {
+            left: 100%;
+        }
+
+        .social-link:hover {
+            background: linear-gradient(135deg, rgba(74, 158, 255, 0.2) 0%, rgba(53, 122, 189, 0.1) 100%);
+            border-color: #4a9eff;
+            transform: translateX(4px);
+            box-shadow: 0 4px 15px rgba(74, 158, 255, 0.3);
+        }
+
+        .social-link .icon {
+            font-size: 20px;
+            width: 24px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .social-link:hover .icon {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        .social-link span {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .social-link.discord {
+            background: linear-gradient(135deg, rgba(88, 101, 242, 0.15) 0%, rgba(88, 101, 242, 0.05) 100%);
+        }
+
+        .social-link.discord:hover {
+            background: linear-gradient(135deg, rgba(88, 101, 242, 0.25) 0%, rgba(88, 101, 242, 0.15) 100%);
+            border-color: #5865f2;
+            box-shadow: 0 4px 15px rgba(88, 101, 242, 0.4);
+        }
+
+        .social-link.shop {
+            background: linear-gradient(135deg, rgba(46, 204, 113, 0.15) 0%, rgba(46, 204, 113, 0.05) 100%);
+        }
+
+        .social-link.shop:hover {
+            background: linear-gradient(135deg, rgba(46, 204, 113, 0.25) 0%, rgba(46, 204, 113, 0.15) 100%);
+            border-color: #2ecc71;
+            box-shadow: 0 4px 15px rgba(46, 204, 113, 0.4);
+        }
+
         @keyframes pulse {
             0%, 100% { opacity: 1; transform: scale(1); }
             50% { opacity: 0.8; transform: scale(1.05); }
