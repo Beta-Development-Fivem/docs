@@ -1,6 +1,6 @@
 # 🚀 Beta Development Resources
 
-**Beta Development Resources** is a licensed and private project designed to document installation and configuration processes for custom scripts such as SIT AND ANIMPOS, ADVANCED RENTALS, and NOTIFY.
+**Beta Development Resources** is a licensed and private project designed to document installation and configuration processes for custom scripts.
 
 > ⚠️ **WARNING:** This software is the property of **Beta Development** and is licensed. Unauthorized use, distribution, resale, or sharing is strictly prohibited and will result in legal action.
 
