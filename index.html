@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,79 +13,140 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: #1a1a1a;
+            background: #0a0a0a;
             color: #e0e0e0;
             display: flex;
             height: 100vh;
             overflow: hidden;
         }
 
-        /* Sidebar */
         .sidebar {
             width: 280px;
-            background: #2a2a2a;
-            border-right: 1px solid #3a3a3a;
+            background: linear-gradient(180deg, #1a1a1a 0%, #151515 100%);
+            border-right: 1px solid #2a2a2a;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
+            box-shadow: 2px 0 20px rgba(0, 0, 0, 0.5);
         }
 
         .logo {
-            padding: 20px;
-            font-size: 18px;
-            font-weight: 600;
-            border-bottom: 1px solid #3a3a3a;
+            padding: 24px 20px;
+            font-size: 19px;
+            font-weight: 700;
+            border-bottom: 1px solid #2a2a2a;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            background: linear-gradient(135deg, #4a9eff 0%, #357abd 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .logo::before {
-            content: "🚀";
-            font-size: 24px;
+            content: "⚡";
+            font-size: 28px;
+            -webkit-text-fill-color: #4a9eff;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.05); }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .nav-section {
             padding: 20px 0;
+            animation: slideIn 0.5s ease-out forwards;
         }
 
         .nav-title {
             padding: 10px 20px;
             font-size: 11px;
             font-weight: 600;
-            color: #888;
+            color: #666;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
         }
 
         .nav-item {
-            padding: 10px 20px;
+            padding: 12px 20px;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 10px;
-            transition: background 0.2s;
+            gap: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
+            overflow: hidden;
+        }
+
+        .nav-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 3px;
+            background: linear-gradient(180deg, #4a9eff 0%, #357abd 100%);
+            transform: scaleY(0);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .nav-item:hover {
-            background: #333;
+            background: rgba(74, 158, 255, 0.1);
+            padding-left: 24px;
+        }
+
+        .nav-item:hover::before {
+            transform: scaleY(1);
         }
 
         .nav-item.active {
-            background: #333;
+            background: rgba(74, 158, 255, 0.15);
             color: #4a9eff;
+        }
+
+        .nav-item.active::before {
+            transform: scaleY(1);
         }
 
         .nav-item .icon {
             font-size: 18px;
             width: 24px;
             text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-item:hover .icon {
+            transform: scale(1.1);
         }
 
         .nav-item .chevron {
             margin-left: auto;
-            transition: transform 0.3s;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             font-size: 12px;
             color: #666;
         }
@@ -97,12 +158,12 @@
         .subnav {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease;
-            background: #252525;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(0, 0, 0, 0.3);
         }
 
         .subnav.show {
-            max-height: 200px;
+            max-height: 250px;
         }
 
         .subnav-item {
@@ -111,12 +172,19 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            transition: background 0.2s;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             font-size: 14px;
+            opacity: 0;
+            transform: translateX(-10px);
+            animation: slideIn 0.3s ease-out forwards;
         }
 
+        .subnav.show .subnav-item:nth-child(1) { animation-delay: 0.05s; }
+        .subnav.show .subnav-item:nth-child(2) { animation-delay: 0.1s; }
+
         .subnav-item:hover {
-            background: #2a2a2a;
+            background: rgba(74, 158, 255, 0.08);
+            padding-left: 58px;
         }
 
         .subnav-item.active {
@@ -127,7 +195,18 @@
             font-size: 14px;
         }
 
-        /* Main Content */
+        .badge {
+            background: linear-gradient(135deg, #4a9eff 0%, #357abd 100%);
+            color: #fff;
+            font-size: 9px;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-left: auto;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
         .main-content {
             flex: 1;
             display: flex;
@@ -136,21 +215,29 @@
         }
 
         .header {
-            background: #2a2a2a;
-            border-bottom: 1px solid #3a3a3a;
-            padding: 15px 30px;
+            background: linear-gradient(180deg, #1a1a1a 0%, #151515 100%);
+            border-bottom: 1px solid #2a2a2a;
+            padding: 18px 30px;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
         }
 
         .search-box {
-            background: #1a1a1a;
-            border: 1px solid #3a3a3a;
-            border-radius: 6px;
-            padding: 8px 15px;
+            background: #0a0a0a;
+            border: 1px solid #2a2a2a;
+            border-radius: 8px;
+            padding: 10px 18px;
             color: #e0e0e0;
-            width: 300px;
+            width: 350px;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .search-box:focus {
+            border-color: #4a9eff;
+            box-shadow: 0 0 0 3px rgba(74, 158, 255, 0.1);
         }
 
         .search-box::placeholder {
@@ -160,67 +247,100 @@
         .content {
             flex: 1;
             overflow-y: auto;
-            padding: 40px;
+            padding: 50px;
+            animation: fadeIn 0.5s ease-out;
         }
 
         .page-header {
-            margin-bottom: 30px;
+            margin-bottom: 40px;
+            animation: fadeIn 0.6s ease-out;
         }
 
         .page-title {
-            font-size: 36px;
-            font-weight: 700;
-            margin-bottom: 10px;
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 18px;
+            background: linear-gradient(135deg, #fff 0%, #888 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .page-title .emoji {
-            font-size: 42px;
+            font-size: 48px;
+            -webkit-text-fill-color: initial;
+            animation: pulse 2s ease-in-out infinite;
         }
 
         .breadcrumb {
             color: #4a9eff;
-            font-size: 12px;
+            font-size: 11px;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+            font-weight: 600;
         }
 
         .card-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
         }
 
         .card {
-            background: #2a2a2a;
-            border: 1px solid #3a3a3a;
-            border-radius: 8px;
-            padding: 20px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #151515 100%);
+            border: 1px solid #2a2a2a;
+            border-radius: 12px;
+            padding: 24px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #4a9eff 0%, #357abd 100%);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
         }
 
         .card:hover {
-            background: #333;
+            background: linear-gradient(135deg, #202020 0%, #1a1a1a 100%);
             border-color: #4a9eff;
-            transform: translateY(-2px);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(74, 158, 255, 0.2);
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
         }
 
         .card-content {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 16px;
         }
 
         .card-icon {
-            font-size: 24px;
+            font-size: 28px;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover .card-icon {
+            transform: scale(1.1) rotate(5deg);
         }
 
         .card-title {
@@ -229,171 +349,247 @@
         }
 
         .card-arrow {
-            font-size: 18px;
+            font-size: 20px;
             color: #666;
+            transition: all 0.3s ease;
         }
 
-        .nav-buttons {
-            display: flex;
-            gap: 15px;
-            margin-top: 30px;
-        }
-
-        .nav-button {
-            flex: 1;
-            background: #2a2a2a;
-            border: 1px solid #3a3a3a;
-            border-radius: 8px;
-            padding: 20px;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .nav-button:hover {
-            background: #333;
-            border-color: #4a9eff;
-        }
-
-        .nav-button.prev {
-            flex-direction: row;
-        }
-
-        .nav-button.next {
-            flex-direction: row-reverse;
-        }
-
-        .nav-button-label {
-            font-size: 11px;
-            color: #888;
-            text-transform: uppercase;
-            margin-bottom: 5px;
-        }
-
-        .nav-button-title {
-            font-size: 16px;
-            font-weight: 600;
+        .card:hover .card-arrow {
+            color: #4a9eff;
+            transform: translateX(4px);
         }
 
         .content-section {
-            background: #2a2a2a;
-            border: 1px solid #3a3a3a;
-            border-radius: 8px;
-            padding: 30px;
-            margin-bottom: 20px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #151515 100%);
+            border: 1px solid #2a2a2a;
+            border-radius: 12px;
+            padding: 35px;
+            margin-bottom: 24px;
+            transition: all 0.3s ease;
+            animation: fadeIn 0.7s ease-out;
+        }
+
+        .content-section:hover {
+            border-color: #3a3a3a;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
         }
 
         .content-section h2 {
-            font-size: 24px;
-            margin-bottom: 15px;
+            font-size: 26px;
+            margin-bottom: 18px;
+            background: linear-gradient(135deg, #fff 0%, #aaa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .content-section p {
-            line-height: 1.6;
+            line-height: 1.8;
             color: #b0b0b0;
-            margin-bottom: 15px;
+            margin-bottom: 16px;
         }
 
         .content-section code {
-            background: #1a1a1a;
-            padding: 2px 6px;
-            border-radius: 4px;
+            background: #0a0a0a;
+            padding: 4px 10px;
+            border-radius: 6px;
             font-family: 'Courier New', monospace;
             color: #4a9eff;
+            border: 1px solid #2a2a2a;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            padding: 12px 0;
+            padding-left: 30px;
+            position: relative;
+            color: #b0b0b0;
+        }
+
+        .feature-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #4a9eff;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .hero-section {
+            text-align: center;
+            padding: 60px 0;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .hero-title {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #4a9eff 0%, #357abd 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            color: #888;
+            margin-bottom: 40px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #1a1a1a 0%, #151515 100%);
+            border: 1px solid #2a2a2a;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            border-color: #4a9eff;
+            box-shadow: 0 8px 30px rgba(74, 158, 255, 0.2);
+        }
+
+        .stat-number {
+            font-size: 36px;
+            font-weight: 800;
+            color: #4a9eff;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .copy-button {
-            background: #3a3a3a;
-            border: 1px solid #4a4a4a;
-            color: #e0e0e0;
-            padding: 8px 16px;
-            border-radius: 6px;
+            background: linear-gradient(135deg, #4a9eff 0%, #357abd 100%);
+            border: none;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 8px;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(74, 158, 255, 0.3);
         }
 
         .copy-button:hover {
-            background: #4a4a4a;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(74, 158, 255, 0.4);
         }
 
         ::-webkit-scrollbar {
-            width: 8px;
+            width: 10px;
         }
 
         ::-webkit-scrollbar-track {
-            background: #1a1a1a;
+            background: #0a0a0a;
         }
 
         ::-webkit-scrollbar-thumb {
-            background: #3a3a3a;
-            border-radius: 4px;
+            background: linear-gradient(180deg, #4a9eff 0%, #357abd 100%);
+            border-radius: 5px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: #4a4a4a;
+            background: linear-gradient(180deg, #5aaeff 0%, #4589cd 100%);
         }
     </style>
 </head>
 <body>
     <div class="sidebar">
-        <div class="logo">Beta Development Resources</div>
+        <div class="logo">Beta Development</div>
         
         <div class="nav-section">
             <div class="nav-item" onclick="showPage('welcome')">
-                <span class="icon">🎉</span>
-                <span>Hoşgeldin</span>
+                <span class="icon">🏠</span>
+                <span>Home</span>
             </div>
         </div>
 
         <div class="nav-section">
-            <div class="nav-title">Beta Development - DOCS</div>
+            <div class="nav-title">Documentation</div>
             
-            <div class="nav-item" onclick="toggleSubnav('sit-animpos')">
-                <span class="icon">🔥</span>
-                <span>SIT AND ANIMPOS</span>
+            <div class="nav-item" onclick="toggleSubnav('inventory-system')">
+                <span class="icon">🎒</span>
+                <span>Inventory System</span>
+                <span class="badge">SOON</span>
                 <span class="chevron">›</span>
             </div>
-            <div class="subnav" id="subnav-sit-animpos">
-                <div class="subnav-item" onclick="showPage('sit-config')">
-                    <span class="icon">🔧</span>
-                    <span>Configuration File</span>
-                </div>
-                <div class="subnav-item" onclick="showPage('sit-installation')">
+            <div class="subnav" id="subnav-inventory-system">
+                <div class="subnav-item" onclick="showPage('inventory-config')">
                     <span class="icon">⚙️</span>
+                    <span>Configuration</span>
+                </div>
+                <div class="subnav-item" onclick="showPage('inventory-installation')">
+                    <span class="icon">📦</span>
                     <span>Installation</span>
                 </div>
             </div>
 
-            <div class="nav-item" onclick="toggleSubnav('advanced-rentals')">
+            <div class="nav-item" onclick="toggleSubnav('advanced-vehicle')">
                 <span class="icon">🚗</span>
-                <span>ADVANCED RENTALS</span>
+                <span>Vehicle System</span>
+                <span class="badge">SOON</span>
                 <span class="chevron">›</span>
             </div>
-            <div class="subnav" id="subnav-advanced-rentals">
-                <div class="subnav-item" onclick="showPage('rentals-config')">
-                    <span class="icon">🔧</span>
-                    <span>Configuration File</span>
-                </div>
-                <div class="subnav-item" onclick="showPage('rentals-installation')">
+            <div class="subnav" id="subnav-advanced-vehicle">
+                <div class="subnav-item" onclick="showPage('vehicle-config')">
                     <span class="icon">⚙️</span>
+                    <span>Configuration</span>
+                </div>
+                <div class="subnav-item" onclick="showPage('vehicle-installation')">
+                    <span class="icon">📦</span>
                     <span>Installation</span>
                 </div>
             </div>
 
-            <div class="nav-item" onclick="toggleSubnav('notify')">
-                <span class="icon">📢</span>
-                <span>NOTIFY</span>
+            <div class="nav-item" onclick="toggleSubnav('notification')">
+                <span class="icon">🔔</span>
+                <span>Notification System</span>
+                <span class="badge">SOON</span>
                 <span class="chevron">›</span>
             </div>
-            <div class="subnav" id="subnav-notify">
-                <div class="subnav-item" onclick="showPage('notify-config')">
-                    <span class="icon">🔧</span>
-                    <span>Configuration File</span>
-                </div>
-                <div class="subnav-item" onclick="showPage('notify-installation')">
+            <div class="subnav" id="subnav-notification">
+                <div class="subnav-item" onclick="showPage('notification-config')">
                     <span class="icon">⚙️</span>
+                    <span>Configuration</span>
+                </div>
+                <div class="subnav-item" onclick="showPage('notification-installation')">
+                    <span class="icon">📦</span>
+                    <span>Installation</span>
+                </div>
+            </div>
+
+            <div class="nav-item" onclick="toggleSubnav('banking')">
+                <span class="icon">💰</span>
+                <span>Banking System</span>
+                <span class="badge">SOON</span>
+                <span class="chevron">›</span>
+            </div>
+            <div class="subnav" id="subnav-banking">
+                <div class="subnav-item" onclick="showPage('banking-config')">
+                    <span class="icon">⚙️</span>
+                    <span>Configuration</span>
+                </div>
+                <div class="subnav-item" onclick="showPage('banking-installation')">
+                    <span class="icon">📦</span>
                     <span>Installation</span>
                 </div>
             </div>
@@ -402,102 +598,270 @@
 
     <div class="main-content">
         <div class="header">
-            <input type="text" class="search-box" placeholder="Search... (Ctrl + K)">
-            <button class="copy-button">Copy</button>
+            <input type="text" class="search-box" placeholder="Search documentation... (Ctrl + K)">
+            <button class="copy-button">Get Started</button>
         </div>
 
-        <div class="content" id="content">
-            <!-- İçerik buraya dinamik olarak yüklenecek -->
-        </div>
+        <div class="content" id="content"></div>
     </div>
 
     <script>
-        // Sayfa verileri - Buraya kolayca yeni sayfa ekleyebilirsin
         const pages = {
             welcome: {
-                title: "Hoşgeldin",
-                emoji: "🎉",
-                breadcrumb: "Beta Development-DOCS",
+                title: "Welcome to Beta Development",
+                emoji: "⚡",
+                breadcrumb: "HOME",
                 content: `
+                    <div class="hero-section">
+                        <div class="hero-title">Premium FiveM Resources</div>
+                        <div class="hero-subtitle">High-performance, fully optimized scripts for your server</div>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number">0.01ms</div>
+                            <div class="stat-label">Average Performance</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">24/7</div>
+                            <div class="stat-label">Support Available</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">10+</div>
+                            <div class="stat-label">Scripts Coming</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">100%</div>
+                            <div class="stat-label">Custom Solutions</div>
+                        </div>
+                    </div>
+
+                    <div class="content-section" style="margin-top: 40px;">
+                        <h2>🚀 About Our Resources</h2>
+                        <p>Beta Development is dedicated to creating high-quality, performance-optimized FiveM resources. Our scripts are built with modern standards, clean code architecture, and extensive customization options.</p>
+                        <p>All our resources feature comprehensive documentation, regular updates, and dedicated support to ensure your server runs smoothly.</p>
+                    </div>
+
                     <div class="content-section">
-                        <h2>Beta Development Resources'a Hoş Geldiniz!</h2>
-                        <p>Bu dokümantasyon sitesinde tüm scriptleriniz için kurulum ve konfigürasyon bilgilerini bulabilirsiniz.</p>
-                        <p>Sol menüden ilgili scripti seçerek başlayabilirsiniz.</p>
+                        <h2>✨ Key Features</h2>
+                        <ul class="feature-list">
+                            <li>Optimized for 0.00-0.02ms performance impact</li>
+                            <li>Full ESX and QBCore framework support</li>
+                            <li>Modern UI/UX design with smooth animations</li>
+                            <li>Extensive configuration options</li>
+                            <li>Regular updates and bug fixes</li>
+                            <li>Professional documentation</li>
+                            <li>Discord support community</li>
+                            <li>Custom development available</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-section">
+                        <h2>📋 Getting Started</h2>
+                        <p>Select any resource from the sidebar to view detailed documentation, installation guides, and configuration options.</p>
+                        <p>For custom development inquiries or support, join our Discord community or contact us directly.</p>
                     </div>
                 `
             },
-            'sit-config': {
-                title: "Configuration File",
-                emoji: "🔧",
-                breadcrumb: "SIT AND ANIMPOS",
-                content: `
-                    <div class="content-section">
-                        <h2>Konfigürasyon Ayarları</h2>
-                        <p>SIT AND ANIMPOS scriptinin konfigürasyon dosyası ayarları.</p>
-                        <p><code>config.lua</code> dosyasını düzenleyerek ayarları değiştirebilirsiniz.</p>
-                    </div>
-                `
-            },
-            'sit-installation': {
-                title: "Installation",
+            'inventory-config': {
+                title: "Inventory System Configuration",
                 emoji: "⚙️",
-                breadcrumb: "SIT AND ANIMPOS",
+                breadcrumb: "INVENTORY SYSTEM",
                 content: `
                     <div class="content-section">
-                        <h2>Kurulum Adımları</h2>
-                        <p>1. Scripti <code>resources</code> klasörüne atın.</p>
-                        <p>2. <code>server.cfg</code> dosyasına <code>ensure sit-animpos</code> ekleyin.</p>
-                        <p>3. Sunucuyu yeniden başlatın.</p>
+                        <h2>Configuration Overview</h2>
+                        <p>The Inventory System offers extensive customization through the <code>config.lua</code> file. This allows you to tailor the system to your server's specific needs.</p>
+                    </div>
+
+                    <div class="content-section">
+                        <h2>Basic Settings</h2>
+                        <p>Configure core functionality including framework selection, database settings, and general behavior options.</p>
+                        <ul class="feature-list">
+                            <li>Framework support (ESX/QBCore)</li>
+                            <li>Database configuration</li>
+                            <li>Weight system settings</li>
+                            <li>Slot configuration</li>
+                            <li>UI customization options</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-section">
+                        <h2>Advanced Options</h2>
+                        <p>Fine-tune advanced features such as item stacking, durability systems, and custom item behaviors.</p>
+                        <p><strong>Coming Soon:</strong> Full configuration documentation will be available upon release.</p>
                     </div>
                 `
             },
-            'rentals-config': {
-                title: "Configuration File",
-                emoji: "🔧",
-                breadcrumb: "ADVANCED RENTALS",
+            'inventory-installation': {
+                title: "Inventory System Installation",
+                emoji: "📦",
+                breadcrumb: "INVENTORY SYSTEM",
                 content: `
                     <div class="content-section">
-                        <h2>Konfigürasyon Ayarları</h2>
-                        <p>Advanced Rentals scriptinin konfigürasyon dosyası ayarları.</p>
+                        <h2>Installation Guide</h2>
+                        <p>Follow these steps to install the Inventory System on your FiveM server.</p>
+                    </div>
+
+                    <div class="content-section">
+                        <h2>Prerequisites</h2>
+                        <ul class="feature-list">
+                            <li>FiveM server build 2802 or higher</li>
+                            <li>ESX Legacy or QBCore framework</li>
+                            <li>MySQL database</li>
+                            <li>Basic server configuration knowledge</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-section">
+                        <h2>Installation Steps</h2>
+                        <p>1. Extract the resource to your <code>resources</code> folder</p>
+                        <p>2. Import the SQL file to your database</p>
+                        <p>3. Configure <code>config.lua</code> according to your framework</p>
+                        <p>4. Add <code>ensure inventory-system</code> to your <code>server.cfg</code></p>
+                        <p>5. Restart your server</p>
+                    </div>
+
+                    <div class="content-section">
+                        <h2>Status</h2>
+                        <p><strong>This resource is currently in development and will be available soon.</strong></p>
                     </div>
                 `
             },
-            'rentals-installation': {
-                title: "Installation",
+            'vehicle-config': {
+                title: "Vehicle System Configuration",
                 emoji: "⚙️",
-                breadcrumb: "ADVANCED RENTALS",
+                breadcrumb: "VEHICLE SYSTEM",
                 content: `
                     <div class="content-section">
-                        <h2>Kurulum Adımları</h2>
-                        <p>Advanced Rentals kurulum talimatları burada yer alacak.</p>
+                        <h2>Configuration Overview</h2>
+                        <p>Comprehensive vehicle management system with advanced features for rental, ownership, and customization.</p>
+                    </div>
+
+                    <div class="content-section">
+                        <h2>Configuration Features</h2>
+                        <ul class="feature-list">
+                            <li>Rental system settings</li>
+                            <li>Vehicle spawn locations</li>
+                            <li>Pricing configuration</li>
+                            <li>Permission systems</li>
+                            <li>Custom vehicle categories</li>
+                            <li>Integration with garage systems</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-section">
+                        <h2>Coming Soon</h2>
+                        <p>Full documentation will be available upon release.</p>
                     </div>
                 `
             },
-            'notify-config': {
-                title: "Configuration File",
-                emoji: "🔧",
-                breadcrumb: "NOTIFY",
+            'vehicle-installation': {
+                title: "Vehicle System Installation",
+                emoji: "📦",
+                breadcrumb: "VEHICLE SYSTEM",
                 content: `
                     <div class="content-section">
-                        <h2>Konfigürasyon Ayarları</h2>
-                        <p>Notify scriptinin konfigürasyon dosyası ayarları.</p>
+                        <h2>Installation Guide</h2>
+                        <p>Complete installation instructions for the Vehicle System.</p>
+                    </div>
+
+                    <div class="content-section">
+                        <h2>Status</h2>
+                        <p><strong>This resource is currently in development and will be available soon.</strong></p>
+                        <p>Stay tuned for updates on our Discord community!</p>
                     </div>
                 `
             },
-            'notify-installation': {
-                title: "Installation",
+            'notification-config': {
+                title: "Notification System Configuration",
                 emoji: "⚙️",
-                breadcrumb: "NOTIFY",
+                breadcrumb: "NOTIFICATION SYSTEM",
                 content: `
                     <div class="content-section">
-                        <h2>Kurulum Adımları</h2>
-                        <p>Notify kurulum talimatları burada yer alacak.</p>
+                        <h2>Configuration Overview</h2>
+                        <p>Modern notification system with beautiful animations and extensive customization options.</p>
+                    </div>
+
+                    <div class="content-section">
+                        <h2>Features</h2>
+                        <ul class="feature-list">
+                            <li>Multiple notification types</li>
+                            <li>Custom styling options</li>
+                            <li>Position configuration</li>
+                            <li>Duration settings</li>
+                            <li>Sound effects</li>
+                            <li>Animation customization</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-section">
+                        <h2>Coming Soon</h2>
+                        <p>Full documentation will be available upon release.</p>
+                    </div>
+                `
+            },
+            'notification-installation': {
+                title: "Notification System Installation",
+                emoji: "📦",
+                breadcrumb: "NOTIFICATION SYSTEM",
+                content: `
+                    <div class="content-section">
+                        <h2>Installation Guide</h2>
+                        <p>Easy installation process for the Notification System.</p>
+                    </div>
+
+                    <div class="content-section">
+                        <h2>Status</h2>
+                        <p><strong>This resource is currently in development and will be available soon.</strong></p>
+                    </div>
+                `
+            },
+            'banking-config': {
+                title: "Banking System Configuration",
+                emoji: "⚙️",
+                breadcrumb: "BANKING SYSTEM",
+                content: `
+                    <div class="content-section">
+                        <h2>Configuration Overview</h2>
+                        <p>Advanced banking system with account management, transactions, and ATM functionality.</p>
+                    </div>
+
+                    <div class="content-section">
+                        <h2>Features</h2>
+                        <ul class="feature-list">
+                            <li>Multiple account types</li>
+                            <li>Transaction history</li>
+                            <li>ATM locations</li>
+                            <li>Bank cards system</li>
+                            <li>Interest rates</li>
+                            <li>Loan system</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-section">
+                        <h2>Coming Soon</h2>
+                        <p>Full documentation will be available upon release.</p>
+                    </div>
+                `
+            },
+            'banking-installation': {
+                title: "Banking System Installation",
+                emoji: "📦",
+                breadcrumb: "BANKING SYSTEM",
+                content: `
+                    <div class="content-section">
+                        <h2>Installation Guide</h2>
+                        <p>Complete setup instructions for the Banking System.</p>
+                    </div>
+
+                    <div class="content-section">
+                        <h2>Status</h2>
+                        <p><strong>This resource is currently in development and will be available soon.</strong></p>
                     </div>
                 `
             }
         };
 
-        // Alt menü toggle
         function toggleSubnav(id) {
             const subnav = document.getElementById(`subnav-${id}`);
             const parentItem = subnav.previousElementSibling;
@@ -506,33 +870,34 @@
             parentItem.classList.toggle('expanded');
         }
 
-        // Sayfa gösterme
         function showPage(pageId) {
             const page = pages[pageId];
             if (!page) return;
 
             const content = document.getElementById('content');
-            content.innerHTML = `
-                <div class="page-header">
-                    <div class="breadcrumb">${page.breadcrumb}</div>
-                    <div class="page-title">
-                        <span class="emoji">${page.emoji}</span>
-                        <span>${page.title}</span>
+            content.style.opacity = '0';
+            
+            setTimeout(() => {
+                content.innerHTML = `
+                    <div class="page-header">
+                        <div class="breadcrumb">${page.breadcrumb}</div>
+                        <div class="page-title">
+                            <span class="emoji">${page.emoji}</span>
+                            <span>${page.title}</span>
+                        </div>
                     </div>
-                </div>
-                ${page.content}
-            `;
+                    ${page.content}
+                `;
+                content.style.opacity = '1';
+            }, 150);
 
-            // Aktif menü öğesini işaretle
             document.querySelectorAll('.nav-item, .subnav-item').forEach(item => {
                 item.classList.remove('active');
             });
         }
 
-        // Sayfa yüklendiğinde hoşgeldin sayfasını göster
         showPage('welcome');
 
-        // Klavye kısayolu (Ctrl+K için arama)
         document.addEventListener('keydown', (e) => {
             if (e.ctrlKey && e.key === 'k') {
                 e.preventDefault();
