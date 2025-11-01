@@ -51,86 +51,6 @@
             animation: pulse 2s ease-in-out infinite;
         }
 
-        .social-links {
-            padding: 20px;
-            border-top: 1px solid #2a2a2a;
-            margin-top: auto;
-        }
-
-        .social-link {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px;
-            margin-bottom: 10px;
-            background: linear-gradient(135deg, rgba(74, 158, 255, 0.1) 0%, rgba(53, 122, 189, 0.05) 100%);
-            border: 1px solid #2a2a2a;
-            border-radius: 8px;
-            text-decoration: none;
-            color: #e0e0e0;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .social-link::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(74, 158, 255, 0.2), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .social-link:hover::before {
-            left: 100%;
-        }
-
-        .social-link:hover {
-            background: linear-gradient(135deg, rgba(74, 158, 255, 0.2) 0%, rgba(53, 122, 189, 0.1) 100%);
-            border-color: #4a9eff;
-            transform: translateX(4px);
-            box-shadow: 0 4px 15px rgba(74, 158, 255, 0.3);
-        }
-
-        .social-link .icon {
-            font-size: 20px;
-            width: 24px;
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
-
-        .social-link:hover .icon {
-            transform: scale(1.2) rotate(5deg);
-        }
-
-        .social-link span {
-            font-size: 14px;
-            font-weight: 600;
-        }
-
-        .social-link.discord {
-            background: linear-gradient(135deg, rgba(88, 101, 242, 0.15) 0%, rgba(88, 101, 242, 0.05) 100%);
-        }
-
-        .social-link.discord:hover {
-            background: linear-gradient(135deg, rgba(88, 101, 242, 0.25) 0%, rgba(88, 101, 242, 0.15) 100%);
-            border-color: #5865f2;
-            box-shadow: 0 4px 15px rgba(88, 101, 242, 0.4);
-        }
-
-        .social-link.shop {
-            background: linear-gradient(135deg, rgba(46, 204, 113, 0.15) 0%, rgba(46, 204, 113, 0.05) 100%);
-        }
-
-        .social-link.shop:hover {
-            background: linear-gradient(135deg, rgba(46, 204, 113, 0.25) 0%, rgba(46, 204, 113, 0.15) 100%);
-            border-color: #2ecc71;
-            box-shadow: 0 4px 15px rgba(46, 204, 113, 0.4);
-        }
-
         @keyframes pulse {
             0%, 100% { opacity: 1; transform: scale(1); }
             50% { opacity: 0.8; transform: scale(1.05); }
@@ -557,19 +477,55 @@
             letter-spacing: 1px;
         }
 
-        .copy-button {
-            background: linear-gradient(135deg, #4a9eff 0%, #357abd 100%);
-            border: none;
-            color: #fff;
+        .header-buttons {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .btn {
             padding: 10px 20px;
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.3s ease;
             font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            border: none;
+        }
+
+        .btn-discord {
+            background: linear-gradient(135deg, #5865F2 0%, #4752C4 100%);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(88, 101, 242, 0.3);
+        }
+
+        .btn-discord:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(88, 101, 242, 0.4);
+        }
+
+        .btn-shop {
+            background: linear-gradient(135deg, #00d4aa 0%, #00a886 100%);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(0, 212, 170, 0.3);
+        }
+
+        .btn-shop:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 212, 170, 0.4);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #4a9eff 0%, #357abd 100%);
+            color: #fff;
             box-shadow: 0 4px 15px rgba(74, 158, 255, 0.3);
         }
 
-        .copy-button:hover {
+        .btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(74, 158, 255, 0.4);
         }
@@ -678,8 +634,18 @@
 
     <div class="main-content">
         <div class="header">
-            <input type="text" class="search-box" placeholder="Search documentation... (Ctrl + K)">
-            <button class="copy-button">Get Started</button>
+            <input type="text" class="search-box" id="searchBox" placeholder="Search documentation... (Ctrl + K)">
+            <div class="header-buttons">
+                <a href="https://discord.gg/AZQwvkJGRQ" target="_blank" class="btn btn-discord">
+                    <span>💬</span>
+                    <span>Discord</span>
+                </a>
+                <a href="https://beta-development-shop.tebex.io/" target="_blank" class="btn btn-shop">
+                    <span>🛒</span>
+                    <span>Shop</span>
+                </a>
+                <button class="btn btn-primary" onclick="showPage('welcome')">Get Started</button>
+            </div>
         </div>
 
         <div class="content" id="content"></div>
@@ -983,6 +949,62 @@
                 e.preventDefault();
                 document.querySelector('.search-box').focus();
             }
+        });
+
+        const searchBox = document.getElementById('searchBox');
+        searchBox.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase().trim();
+            
+            if (searchTerm === '') {
+                document.querySelectorAll('.nav-item, .subnav-item').forEach(item => {
+                    item.style.display = '';
+                });
+                document.querySelectorAll('.subnav').forEach(subnav => {
+                    subnav.style.display = '';
+                });
+                return;
+            }
+
+            document.querySelectorAll('.nav-item').forEach(item => {
+                const text = item.textContent.toLowerCase();
+                const hasMatch = text.includes(searchTerm);
+                const subnav = item.nextElementSibling;
+                
+                if (hasMatch) {
+                    item.style.display = '';
+                    if (subnav && subnav.classList.contains('subnav')) {
+                        subnav.style.display = '';
+                        subnav.classList.add('show');
+                        item.classList.add('expanded');
+                    }
+                } else {
+                    let subnavHasMatch = false;
+                    if (subnav && subnav.classList.contains('subnav')) {
+                        const subItems = subnav.querySelectorAll('.subnav-item');
+                        subItems.forEach(subItem => {
+                            const subText = subItem.textContent.toLowerCase();
+                            if (subText.includes(searchTerm)) {
+                                subnavHasMatch = true;
+                                subItem.style.display = '';
+                            } else {
+                                subItem.style.display = 'none';
+                            }
+                        });
+                        
+                        if (subnavHasMatch) {
+                            item.style.display = '';
+                            subnav.style.display = '';
+                            subnav.classList.add('show');
+                            item.classList.add('expanded');
+                        } else {
+                            item.style.display = 'none';
+                            subnav.style.display = 'none';
+                        }
+                    } else {
+                        item.style.display = 'none';
+                    }
+                }
+            });
         });
     </script>
 </body>
