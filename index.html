@@ -546,6 +546,553 @@
         ::-webkit-scrollbar-thumb:hover {
             background: linear-gradient(180deg, #5aaeff 0%, #4589cd 100%);
         }
+
+        /* Mobile - Phones (up to 768px) */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+                max-height: 50vh;
+                border-right: none;
+                border-bottom: 1px solid #2a2a2a;
+            }
+
+            .logo {
+                padding: 16px;
+                font-size: 16px;
+            }
+
+            .logo::before {
+                font-size: 22px;
+            }
+
+            .nav-section {
+                padding: 10px 0;
+            }
+
+            .nav-item {
+                padding: 10px 16px;
+                font-size: 14px;
+            }
+
+            .nav-item .icon {
+                font-size: 16px;
+            }
+
+            .subnav-item {
+                padding: 8px 16px 8px 48px;
+                font-size: 13px;
+            }
+
+            .header {
+                padding: 12px 16px;
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+
+            .search-box {
+                width: 100%;
+                order: 2;
+            }
+
+            .header-buttons {
+                order: 1;
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .btn {
+                padding: 8px 12px;
+                font-size: 12px;
+                flex: 1;
+                justify-content: center;
+            }
+
+            .content {
+                padding: 20px 16px;
+            }
+
+            .page-title {
+                font-size: 28px;
+                flex-wrap: wrap;
+            }
+
+            .page-title .emoji {
+                font-size: 32px;
+            }
+
+            .hero-section {
+                padding: 30px 0;
+            }
+
+            .hero-title {
+                font-size: 32px;
+            }
+
+            .hero-subtitle {
+                font-size: 16px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+
+            .stat-number {
+                font-size: 28px;
+            }
+
+            .stat-label {
+                font-size: 12px;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .content-section {
+                padding: 20px;
+            }
+
+            .content-section h2 {
+                font-size: 20px;
+            }
+        }
+
+        /* Tablet & Small Desktop (769px to 1366px) */
+        @media (min-width: 769px) and (max-width: 1366px) {
+            .sidebar {
+                width: 260px;
+            }
+
+            .content {
+                padding: 35px;
+            }
+
+            .page-title {
+                font-size: 36px;
+            }
+
+            .hero-title {
+                font-size: 42px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .card-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+        }
+
+        /* Full HD - 1920x1080 (1367px to 1920px) */
+        @media (min-width: 1367px) and (max-width: 1920px) {
+            .sidebar {
+                width: 280px;
+            }
+
+            .content {
+                padding: 50px;
+            }
+
+            .page-title {
+                font-size: 42px;
+            }
+
+            .hero-title {
+                font-size: 48px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .card-grid {
+                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            }
+        }
+
+        /* 2K - 2560x1440 (1921px to 2560px) */
+        @media (min-width: 1921px) and (max-width: 2560px) {
+            .sidebar {
+                width: 320px;
+            }
+
+            .logo {
+                font-size: 21px;
+                padding: 28px 24px;
+            }
+
+            .logo::before {
+                font-size: 32px;
+            }
+
+            .nav-item {
+                padding: 14px 24px;
+                font-size: 16px;
+            }
+
+            .nav-item .icon {
+                font-size: 20px;
+            }
+
+            .subnav-item {
+                padding: 12px 24px 12px 60px;
+                font-size: 15px;
+            }
+
+            .content {
+                padding: 60px 80px;
+            }
+
+            .page-title {
+                font-size: 52px;
+            }
+
+            .page-title .emoji {
+                font-size: 56px;
+            }
+
+            .breadcrumb {
+                font-size: 12px;
+            }
+
+            .hero-section {
+                padding: 80px 0;
+            }
+
+            .hero-title {
+                font-size: 60px;
+            }
+
+            .hero-subtitle {
+                font-size: 24px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 28px;
+            }
+
+            .stat-card {
+                padding: 40px;
+            }
+
+            .stat-number {
+                font-size: 44px;
+            }
+
+            .stat-label {
+                font-size: 16px;
+            }
+
+            .card-grid {
+                grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+                gap: 28px;
+            }
+
+            .card {
+                padding: 28px;
+            }
+
+            .card-icon {
+                font-size: 32px;
+            }
+
+            .card-title {
+                font-size: 18px;
+            }
+
+            .content-section {
+                padding: 40px;
+                margin-bottom: 28px;
+            }
+
+            .content-section h2 {
+                font-size: 30px;
+                margin-bottom: 20px;
+            }
+
+            .content-section p {
+                font-size: 17px;
+                line-height: 2;
+            }
+
+            .feature-list li {
+                padding: 14px 0;
+                padding-left: 36px;
+                font-size: 17px;
+            }
+
+            .feature-list li::before {
+                font-size: 20px;
+            }
+
+            .search-box {
+                width: 420px;
+                padding: 12px 20px;
+                font-size: 15px;
+            }
+
+            .btn {
+                padding: 12px 24px;
+                font-size: 15px;
+            }
+        }
+
+        /* 4K - 3840x2160 (2561px and above) */
+        @media (min-width: 2561px) {
+            .sidebar {
+                width: 400px;
+            }
+
+            .logo {
+                font-size: 26px;
+                padding: 36px 32px;
+            }
+
+            .logo::before {
+                font-size: 40px;
+            }
+
+            .nav-section {
+                padding: 28px 0;
+            }
+
+            .nav-title {
+                padding: 14px 28px;
+                font-size: 14px;
+            }
+
+            .nav-item {
+                padding: 18px 28px;
+                font-size: 20px;
+                gap: 16px;
+            }
+
+            .nav-item .icon {
+                font-size: 26px;
+                width: 32px;
+            }
+
+            .nav-item .chevron {
+                font-size: 16px;
+            }
+
+            .subnav-item {
+                padding: 16px 28px 16px 76px;
+                font-size: 18px;
+            }
+
+            .subnav-item .icon {
+                font-size: 18px;
+            }
+
+            .badge {
+                font-size: 12px;
+                padding: 5px 12px;
+            }
+
+            .header {
+                padding: 24px 48px;
+            }
+
+            .content {
+                padding: 80px 120px;
+            }
+
+            .page-title {
+                font-size: 72px;
+                gap: 24px;
+            }
+
+            .page-title .emoji {
+                font-size: 80px;
+            }
+
+            .breadcrumb {
+                font-size: 14px;
+                margin-bottom: 16px;
+            }
+
+            .hero-section {
+                padding: 100px 0;
+            }
+
+            .hero-title {
+                font-size: 84px;
+                margin-bottom: 32px;
+            }
+
+            .hero-subtitle {
+                font-size: 32px;
+                margin-bottom: 60px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 36px;
+                margin-top: 60px;
+            }
+
+            .stat-card {
+                padding: 56px;
+            }
+
+            .stat-number {
+                font-size: 64px;
+                margin-bottom: 12px;
+            }
+
+            .stat-label {
+                font-size: 20px;
+            }
+
+            .card-grid {
+                grid-template-columns: repeat(auto-fit, minmax(520px, 1fr));
+                gap: 36px;
+            }
+
+            .card {
+                padding: 36px;
+                border-radius: 16px;
+            }
+
+            .card-content {
+                gap: 20px;
+            }
+
+            .card-icon {
+                font-size: 40px;
+            }
+
+            .card-title {
+                font-size: 22px;
+            }
+
+            .card-arrow {
+                font-size: 26px;
+            }
+
+            .content-section {
+                padding: 52px;
+                margin-bottom: 36px;
+                border-radius: 16px;
+            }
+
+            .content-section h2 {
+                font-size: 40px;
+                margin-bottom: 28px;
+            }
+
+            .content-section p {
+                font-size: 22px;
+                line-height: 2.2;
+                margin-bottom: 22px;
+            }
+
+            .content-section code {
+                padding: 6px 14px;
+                font-size: 20px;
+            }
+
+            .feature-list li {
+                padding: 18px 0;
+                padding-left: 48px;
+                font-size: 22px;
+            }
+
+            .feature-list li::before {
+                font-size: 26px;
+            }
+
+            .search-box {
+                width: 560px;
+                padding: 16px 26px;
+                font-size: 18px;
+                border-radius: 12px;
+            }
+
+            .btn {
+                padding: 16px 32px;
+                font-size: 18px;
+                gap: 12px;
+                border-radius: 12px;
+            }
+
+            ::-webkit-scrollbar {
+                width: 14px;
+            }
+
+            ::-webkit-scrollbar-thumb {
+                border-radius: 7px;
+            }
+        }
+
+        /* Small phones (up to 480px) */
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 14px;
+                padding: 14px;
+            }
+
+            .logo::before {
+                font-size: 20px;
+            }
+
+            .page-title {
+                font-size: 24px;
+                gap: 10px;
+            }
+
+            .page-title .emoji {
+                font-size: 28px;
+            }
+
+            .hero-title {
+                font-size: 26px;
+            }
+
+            .hero-subtitle {
+                font-size: 14px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-card {
+                padding: 24px;
+            }
+
+            .stat-number {
+                font-size: 32px;
+            }
+
+            .btn {
+                padding: 8px 10px;
+                font-size: 11px;
+                gap: 4px;
+            }
+
+            .content-section {
+                padding: 16px;
+            }
+
+            .content-section h2 {
+                font-size: 18px;
+            }
+
+            .content-section p {
+                font-size: 14px;
+            }
+        }
     </style>
 </head>
 <body>
